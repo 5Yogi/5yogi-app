@@ -1,21 +1,22 @@
+
 workflows:
   android-workflow:
-    name: Android AAB Build
+    name: Android FB Direct
     instance_type: mac_mini_m2
-    max_build_duration: 30
+    max_build_duration: 60
     environment:
       flutter: stable
       xcode: latest
     scripts:
       - name: Fix missing android folder
         script: |
-          flutter create . --platforms=android --org com.fiveyogi.app --project-name five_yogi
+          rm -rf android
+          flutter create . --platforms=android --org com.fiveyogi.app --project-name five_yogi --overwrite
       - name: Get dependencies
         script: |
           flutter pub get
-      - name: Build AAB for Play Store
+      - name: Build AAB
         script: |
           flutter build appbundle --release
     artifacts:
       - build/**/outputs/**/*.aab
-      - build/**/outputs/**/*.apk

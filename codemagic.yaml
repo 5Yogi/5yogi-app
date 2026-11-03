@@ -1,4 +1,3 @@
-
 workflows:
   android-production:
     name: 5Yogi Production Build

@@ -1,12 +1,11 @@
 
 name: five_yogi
-description: 5Yogi - Face Sculpt & Restorative Yoga - Direct Facebook Videos
+description: 5Yogi - Face Sculpt & Restorative Yoga - 7 Day Face Lift Reset
 publish_to: 'none'
-version: 1.0.0+3
+version: 1.0.0+4
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
-  flutter: ">=3.0.0"
 
 dependencies:
   flutter:

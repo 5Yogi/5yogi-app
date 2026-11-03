@@ -1,22 +1,22 @@
-name: five_yogi
-description: 5Yogi - Face Sculpt & Restorative Yoga
-publish_to: 'none'
-version: 1.0.0+1
-environment:
-  sdk: ">=3.2.0 <4.0.0"
-  flutter: ">=3.16.0"
-dependencies:
-  flutter:
-    sdk: flutter
-  youtube_player_iframe: ^4.0.6
-  google_fonts: 6.1.0
-  shared_preferences: 2.2.2
-  image_picker: 1.0.7
-  cupertino_icons: 1.0.2
-
-flutter:
-  uses-material-design: true
-
-# FIX lỗi build AAB trên Codemagic
-dependency_overrides:
-  flutter_inappwebview_android: 1.1.4
+workflows:
+  android-workflow:
+    name: Android AAB Build
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+    environment:
+      flutter: stable
+      xcode: latest
+    scripts:
+      - name: Fix missing android folder
+        script: |
+          rm -rf android
+          flutter create . --platforms=android --org com.fiveyogi.app --project-name five_yogi --overwrite
+      - name: Get dependencies
+        script: |
+          flutter pub get
+      - name: Build AAB for Play Store
+        script: |
+          flutter build appbundle --release
+    artifacts:
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/*.apk

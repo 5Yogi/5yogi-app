@@ -1,22 +1,13 @@
-workflows:
-  android-workflow:
-    name: Android AAB Build
-    instance_type: mac_mini_m2
-    max_build_duration: 30
-    environment:
-      flutter: stable
-      xcode: latest
-    scripts:
-      - name: Fix missing android folder
-        script: |
-          rm -rf android
-          flutter create . --platforms=android --org com.fiveyogi.app --project-name five_yogi --overwrite
-      - name: Get dependencies
-        script: |
-          flutter pub get
-      - name: Build AAB for Play Store
-        script: |
-          flutter build appbundle --release
-    artifacts:
-      - build/**/outputs/**/*.aab
-      - build/**/outputs/**/*.apk
+name: five_yogi
+description: 5Yogi - Face Sculpt & Restorative Yoga
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: ">=3.19.0 <4.0.0"
+  flutter: ">=3.19.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: 1.0.2
+flutter:
+  uses-material-design: true
